@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoneyLiveArea</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-left">
+            <div class="logo"> 
+                <img class="logo" src="./money emblem.png" alt="money-amblem-01" />
+            </div> 
+            <h2 class="site-title">MoneyLiveArea</h2>
+        </div>
+
+        <div class="header-center search-container">
+            <input type="text" id="crypto-search-input" placeholder="Search" autocomplete="off">
+            <div id="crypto-search-results" class="results-dropdown"></div>
+        </div>
+
+        <div class="header-right">
+            <a href="giriş/giriş.html" class="btn btn-primary">Giriş Yap</a>
+            <a href="kayıtol/kayıtol.html" class="btn btn-outline">Kayıt Ol</a>
+        </div>
+    </header>
+
+    <div class="hero-section">
+        <p>Canlı kripto para fiyatlarını takip edin ve favori coinlerinizi panoya ekleyin!</p>
+    </div>
+    
+    <h1>İşlem hacmi en yüksek 8 coin</h1>
+
+    <div class="dashboard">
+        <div class="card" onclick="grafigiAc('BTCUSDT', 'Bitcoin (BTC / USDT)')">
+            <div class="symbol-name">Bitcoin (BTC/USDT)</div>
+            <div class="price" id="price-btc">Yükleniyor...</div>
+            <div class="status" id="status-btc">Canlı Bağlantı Bekleniyor</div>
+        </div>
+
+        <div class="card" onclick="grafigiAc('AVAXUSDT', 'Avalanche (AVAX / USDT)')">
+            <div class="symbol-name">Avalanche (AVAX/USDT)</div>
+            <div class="price" id="price-avax">Yükleniyor...</div>
+            <div class="status" id="status-avax">Canlı Bağlantı Bekleniyor</div>
+        </div>
+
+        <div class="card" onclick="grafigiAc('ETHUSDT', 'Ethereum (ETH / USDT)')">
+            <div class="symbol-name">Ethereum (ETH/USDT)</div>
+            <div class="price" id="price-eth">Yükleniyor...</div>
+            <div class="status" id="status-eth">Canlı bağlantı Bekleniyor..</div>
+        </div>
+
+        <div class="card" onclick="grafigiAc('DOGEUSDT', 'Doge (DOGE / USDT)')">
+            <div class="symbol-name">Doge (DOGE/USDT)</div>
+            <div class="price" id="price-doge">Yükleniyor...</div>
+            <div class="status" id="status-doge">Canlı bağlantı Bekleniyor..</div>
+        </div>
+
+        <div class="card" onclick="grafigiAc('XRPUSDT', 'Ripple (XRP / USDT)')">
+            <div class="symbol-name">Ripple (XRP/USDT)</div>
+            <div class="price" id="price-ripple">Veri Bekleniyor</div>
+            <div class="status" id="status-ripple">Canlı bağlantı Bekleniyor</div>
+        </div>
+
+        <div class="card" onclick="grafigiAc('ADAUSDT', 'Cardano (ADA / USDT)')">
+            <div class="symbol-name">Cardano (ADA/USDT)</div>
+            <div class="price" id="price-ada">Yükleniyor...</div>
+            <div class="status" id="status-ada">Canlı bağlantı Bekleniyor..</div>
+        </div>
+
+        <div class="card" onclick="grafigiAc('DOTUSDT', 'Polkadot (DOT / USDT)')">
+            <div class="symbol-name">Polkadot (DOT/USDT)</div>
+            <div class="price" id="price-dot">Yükleniyor...</div>
+            <div class="status" id="status-dot">Canlı bağlantı Bekleniyor..</div>
+        </div>
+
+        <div class="card" onclick="grafigiAc('SOLUSDT', 'Solana (SOL / USDT)')">
+            <div class="symbol-name">Solana (SOL/USDT)</div>  
+            <div class="price" id="price-sol">Yükleniyor...</div>
+            <div class="status" id="status-sol">Canlı bağlantı Bekleniyor..</div>
+        </div>
+    </div> <div id="custom-section" style="display: none;">
+        <h2 style="text-align: center; color: #c5fb6e; margin-top: 50px; border-top: 1px solid #30363d; padding-top: 30px;">
+            ⭐ Senin Takip Ettiklerin
+        </h2>
+        
+        <div class="dashboard" id="custom-dashboard">
+            </div>
+    </div> <div class="bottom-widgets">
+        <div class="video-widget">
+            <h2 class="widget-title">📺 Günün Analizi</h2>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/lEMHYOf90SQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div class="comment-widget">
+            <h2 class="widget-title">💬 Yayıncı Yorumları</h2>
+            
+            <form id="comment-form">
+                <input type="text" id="comment-author" placeholder="Adınız veya Unvanınız..." required>
+                <textarea id="comment-text" rows="3" placeholder="Piyasa hakkındaki düşüncelerinizi paylaşın..." required></textarea>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Yorum Gönder</button>
+            </form>
+
+            <div id="comments-list">
+                 </div>
+        </div>
+    </div>
+
+    <div id="chart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="grafigiKapat()">&times;</span>
+            <h2 id="modal-title" style="margin-top:0; color:#f3ba2f;">Grafik Yükleniyor...</h2>
+            
+            <div class="chart-lock-container">
+                <h3 class="lock-text">Grafiği görmek için üye girişi yapınız veya kayıt olunuz.</h3>
+                <div class="lock-buttons">
+                    <a href="giriş/giriş.html" class="lock-btn btn-primary">Giriş Yap</a>
+                    <a href="kayıtol/kayıtol.html" class="lock-btn btn-outline">Kayıt Ol</a>
+                </div>
+            </div>
+
+            <div class="tv-logo" style="position:absolute; bottom:15px; left:25px; color:#8b949e; font-weight:bold;">TV</div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <img src="./money emblem.png" alt="MoneyLiveArea Logo">
+                    <h3>MoneyLiveArea</h3>
+                </div>
+                <p>Kripto para piyasasını eş zamanlı takip edin, analizleri okuyun ve kendi favori listenizi oluşturarak yatırımlarınızı kolayca yönetin.</p>
+            </div>
+            <div class="footer-warning">
+                <h2>Yasal Uyarı</h2>
+                <p>Burada yer alan yatırım bilgi, yorum ve tavsiyeleri yatırım danışmanlığı kapsamında değildir. Kripto para birimleri yüksek volatilite içerir ve risk taşır.</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 MoneyLiveArea. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MoneyLiveArea</title>
+  <link rel="stylesheet" href="./kayıtol.css">
+</head>
+<body>
+<header class="header">
+        
+        <div class="header-left">
+           <div class="logo"> 
+               <img src="../money emblem.png" alt="money-amblem-01" style="width: 100%; height: 100%; border-radius: 50%;" />
+           </div> 
+           <h2 class="site-title" style="color: #fff; margin: 0;">MoneyLiveArea</h2>
+        </div>
+        <div class="header-right">
+            <button class="header-btn" onclick="window.location.href='../index.html'">Ana Sayfa</button>
+        </div>
+
+    </header>
+  <div class="form-wrapper">
+    <div class="form-container">
+      
+      <form id="KayıtForm">
+        <div class="form-group">
+          <label for="firstName">Nickname:</label>
+           <input type="text" id="nickname"  name="nickname" placeholder="nickname">
+        </div>
+
+        <div class="form-group">
+          <label for="age">Yaş:</label>
+          <input type="number" id="yaş" min="18" name="yaş" placeholder="yaş">
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" placeholder="email">
+        </div>
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="password">
+          </div>
+        <button type="submit" class="button button--success">Kayıt Ol</button>
+      </form>
+
+    </div>
+  </div>
+
+  <script src="./kayıtol.js"></script>
+</body>
+</html>

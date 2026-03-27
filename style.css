@@ -1,0 +1,362 @@
+/* =========================================
+   1. GENEL AYARLAR VE SIFIRLAMALAR
+   ========================================= */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #0d1117; 
+    color: #c9d1d9; 
+    font-family: sans-serif;
+    margin: 0; 
+    padding: 20px;
+}
+
+h1 { 
+    text-align: center; 
+    color: #fff; 
+    padding-bottom: 8px; 
+    margin: 0 0 20px 0; 
+}
+
+/* =========================================
+   2. ÜST MENÜ (HEADER) VE BUTONLAR
+   ========================================= */
+.header {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    background-color: #161b22; 
+    padding: 15px 30px;
+    border-bottom: 1px solid #30363d;
+    margin-bottom: 20px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px; 
+}
+
+.logo {
+    width: 45px;
+    height: 45px;
+    background-color: #c5fb6e; 
+    color: #000;
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%; 
+    overflow: hidden;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+}
+
+.site-title {
+    color: #ffffff;
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.header-right {
+    display: flex;
+    gap: 15px; 
+}
+
+/* Genel Buton Stilleri */
+.btn {
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: #c5fb6e;
+    border: 2px solid #4cf92d;
+}
+
+.btn-outline:hover {
+    background-color: rgba(76, 249, 45, 0.1); 
+}
+
+.btn-primary {
+    background-color: #c5fb6e;
+    color: #000000;
+    border: 2px solid #4cf92d;
+}
+
+.btn-primary:hover {
+    background-color: #089700; 
+    border-color: #4cf92d;
+    color: #ffffff;
+}
+
+/* =========================================
+   3. SLOGAN (HERO) VE ARAMA ÇUBUĞU
+   ========================================= */
+.hero-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.hero-section p {
+    color: #8b949e;
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.header-center, .search-container {
+    flex: 1; 
+    max-width: 500px; 
+    margin: 0 20px; 
+    position: relative;
+}
+
+#crypto-search-input { 
+    width: 100%; 
+    padding: 15px; 
+    font-size: 16px; 
+    background: #161b22; 
+    border: 2px solid #30363d; 
+    color: #fff; 
+    border-radius: 10px; 
+    outline: none; 
+    transition: 0.3s; 
+}
+
+#crypto-search-input:focus { 
+    border-color: #4cf92d; 
+}
+
+.results-dropdown { 
+    position: absolute; 
+    top: 100%; 
+    left: 0; 
+    width: 100%; 
+    background: #1c2128; 
+    border: 1px solid #30363d; 
+    border-top: none; 
+    border-radius: 0 0 10px 10px; 
+    max-height: 250px; 
+    overflow-y: auto; 
+    z-index: 100; 
+    display: none; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5); 
+}
+
+.result-item { 
+    padding: 12px 15px; 
+    cursor: pointer; 
+    display: flex; 
+    justify-content: space-between; 
+    border-bottom: 1px solid #30363d; 
+}
+
+.result-item:hover { background: #2d333b; }
+.result-symbol { font-weight: bold; color: #c5fb6e; }
+.result-desc { color: #8b949e; font-size: 0.85rem; }
+
+/* =========================================
+   4. KARTLAR VE PANO (DASHBOARD)
+   ========================================= */
+.dashboard { 
+    display: grid; 
+    gap: 20px; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+}
+
+.card { 
+    background: #161b22; 
+    border: 1px solid #30363d; 
+    border-radius: 12px; 
+    padding: 20px; 
+    text-align: center; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3); 
+    cursor: pointer; 
+    transition: transform 0.2s; 
+}
+
+.card:hover { transform: translateY(-5px); }
+.symbol-name { font-size: 1.2rem; color: #8b949e; margin-bottom: 10px; font-weight: bold; }
+.price { font-size: 2rem; font-weight: bold; margin: 10px 0; color: #fff; }
+.status { font-size: 0.85rem; color: #3fb950; }
+.up { color: #3fb950 !important; } 
+.down { color: #f85149 !important; }
+
+/* =========================================
+   5. KISITLANMIŞ GRAFİK PENCERESİ (MODAL)
+   ========================================= */
+.modal {
+    display: none; 
+    position: fixed; z-index: 9999; left: 0; top: 0;
+    width: 100%; height: 100%; 
+    background-color: rgba(0,0,0,0.85); 
+    backdrop-filter: blur(5px); 
+}
+
+.modal-content {
+    background-color: #161b22;
+    margin: 5% auto; 
+    padding: 25px;
+    border: 1px solid #30363d;
+    border-radius: 12px;
+    width: 90%; max-width: 800px; 
+    box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+    position: relative;
+}
+
+.close-btn {
+    color: #8b949e; float: right; font-size: 32px; font-weight: bold; cursor: pointer;
+    line-height: 1; margin-top: -10px; margin-right: -10px;
+}
+.close-btn:hover { color: #f85149; }
+
+.chart-lock-container {
+    width: 100%; height: 350px; 
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    background-color: #0d1117; 
+    border-radius: 8px;
+    border: 1px dashed #30363d;
+    margin-top: 20px;
+}
+
+.lock-text {
+    color: #ffffff; font-weight: bold; font-size: 1.8rem; text-align: center;
+    margin: 0 0 30px 0; max-width: 600px; line-height: 1.3;
+}
+
+.lock-buttons { display: flex; gap: 15px; justify-content: center; }
+
+.lock-btn {
+    text-decoration: none; padding: 12px 24px; font-size: 1.1rem; font-weight: bold;
+    border-radius: 8px; transition: 0.3s; cursor: pointer; text-align: center;
+}
+.lock-btn.btn-primary { background: #c5fb6e; color: #000; border: 2px solid #4cf92d; }
+.lock-btn.btn-primary:hover { background: #089700; color: #fff; }
+.lock-btn.btn-outline { background: transparent; color: #c5fb6e; border: 2px solid #4cf92d; }
+.lock-btn.btn-outline:hover { background: rgba(76, 249, 45, 0.1); }
+
+/* =========================================
+   6. VİDEO VE YORUM ALANI (ALT BÖLÜM)
+   ========================================= */
+.bottom-widgets {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 30px;
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+.widget-title {
+    color: #ffffff; font-size: 1.3rem; border-bottom: 2px solid #30363d;
+    padding-bottom: 10px; margin-top: 0;
+}
+
+.video-widget, .comment-widget {
+    background: #161b22; border: 1px solid #30363d; border-radius: 12px;
+    padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.video-container {
+    position: relative; width: 100%; padding-bottom: 56.25%; height: 0;
+    border-radius: 8px; overflow: hidden;
+}
+.video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+#comment-form { display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px; }
+#comment-form input, #comment-form textarea {
+    width: 100%; padding: 12px; background: #0d1117; border: 1px solid #30363d;
+    color: #ffffff; border-radius: 8px; font-family: inherit; transition: 0.3s;
+}
+#comment-form input:focus, #comment-form textarea:focus { border-color: #4cf92d; outline: none; }
+
+#comments-list { max-height: 300px; overflow-y: auto; padding-right: 5px; }
+.comment-box {
+    background: #0d1117; border-left: 4px solid #c5fb6e; 
+    padding: 15px; margin-bottom: 15px; border-radius: 0 8px 8px 0;
+}
+.comment-header { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.85rem; }
+.comment-author { color: #c5fb6e; font-weight: bold; }
+.comment-date { color: #8b949e; }
+.comment-text { color: #c9d1d9; margin: 0; font-size: 0.95rem; line-height: 1.4; }
+
+/* =========================================
+   7. FOOTER (ALT BİLGİ)
+   ========================================= */
+.site-footer {
+    background-color: #161b22; border-top: 1px solid #30363d;
+    padding: 40px 20px 20px 20px; margin-top: 40px;
+}
+
+.footer-container {
+    max-width: 1200px; margin: 0 auto; display: grid;
+    grid-template-columns: 2fr 1fr; gap: 30px; margin-bottom: 20px;
+}
+
+.footer-logo { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+.footer-logo img { width: 40px; height: 40px; border-radius: 50%; background-color: #c5fb6e; }
+.footer-logo h3 { color: #ffffff; margin: 0; font-size: 1.5rem; }
+.footer-about p { line-height: 1.6; font-size: 14px; background-color: #0d1117;
+    padding: 15px; margin:0; border-radius: 8px; border: 1px dashed #ffffff; color: #ffffff; }
+
+.footer-warning h2 { color: #ffffff; margin-top: 0; position: relative; padding-bottom: 10px; }
+.footer-warning h2::after {
+    content: ''; position: absolute; left: 0; bottom: 0;
+    width: 30px; height: 3px; background-color: #c5fb6e; border-radius: 2px;
+}
+.footer-warning p {
+    line-height: 1.6; font-size: 14px; background-color: #0d1117;
+    padding: 15px; border-radius: 8px; border: 1px dashed #ffffff; color: #ffffff;
+}
+
+.footer-bottom {
+    text-align: center; padding-top: 20px; border-top: 1px dashed #ffffff;
+    font-size: 14px; color: #ffffff;
+}
+
+/* =========================================
+   8. MOBİL VE TABLET UYUMLULUK (RESPONSIVE)
+   ========================================= */
+
+/* Tablet ve Büyük Telefonlar (768px ve altı) */
+@media (max-width: 768px) {
+    body { padding: 10px; }
+    
+    .header { flex-direction: column; gap: 15px; padding: 15px; }
+    .header-center, .search-container { width: 100%; margin: 0; }
+    
+    .dashboard { grid-template-columns: 1fr; }
+    .price { font-size: 1.8rem; }
+    
+    .bottom-widgets { grid-template-columns: 1fr; }
+    
+    .footer-container { grid-template-columns: 1fr; text-align: center; }
+    .footer-logo { justify-content: center; }
+    .footer-warning h2::after { left: 50%; transform: translateX(-50%); }
+    
+    .lock-text { font-size: 1.4rem; }
+    .lock-buttons { flex-direction: column; width: 100%; padding: 0 20px; }
+    .lock-btn { width: 100%; }
+}
+
+/* Küçük Ekranlı Telefonlar (480px ve altı) */
+@media (max-width: 480px) {
+    .site-footer { padding: 25px 10px 10px 10px; }
+    .footer-logo h3 { font-size: 1.3rem; }
+    .footer-logo img { width: 35px; height: 35px; }
+    .footer-warning p { padding: 10px; font-size: 0.85rem; }
+}

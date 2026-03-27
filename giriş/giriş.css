@@ -1,0 +1,187 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+    background: #0d1117; 
+    color: #c9d1d9; 
+    font-family: sans-serif;
+    margin: 0; 
+    padding: 20px;
+}
+
+/* =========================================
+   ÜST MENÜ (HEADER) VE LOGO
+   ========================================= */
+.header {
+    display: flex;
+    justify-content: space-between; /* İŞTE SİHİR BURADA: Sol ve sağ kutuyu iki kenara yaslar */
+    align-items: center; 
+    background-color: #161b22; 
+    padding: 15px 30px;
+    border-bottom: 1px solid #30363d;
+    margin-bottom: 20px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center; /* 'column' yazan hatalı kısmı 'center' olarak düzelttim */
+    gap: 15px; 
+}
+
+.logo {
+    width: 45px;
+    height: 45px;
+    background-color: #c5fb6e; 
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%; 
+    overflow: hidden; /* Resmin yuvarlak dışına taşmasını engeller */
+}
+
+/* Üst Menüdeki Buton İçin Özel Tasarım (Tam ekran olmasın diye) */
+.header-btn {
+    padding: 10px 20px;
+    background-color: #c5fb6e;
+    color: #000;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.header-btn:hover {
+    background-color: #a4db4b;
+}
+
+/* (Buradan aşağısı senin eski .form-wrapper ve .form-container kodlarınla aynı kalacak, onları silme) */
+/* =========================================
+   İŞTE FORMU ORTALAYAN SİHİRLİ ALAN
+   ========================================= */
+.form-wrapper {
+    display: flex;
+    justify-content: center; /* Yatayda tam ortaya alır */
+    align-items: center;     /* Dikeyde tam ortaya alır */
+    
+    /* Üstteki header ve body padding boşluklarını hesaba katarak 
+       ekranın geri kalan tüm yüksekliğini kaplamasını sağlarız */
+    min-height: calc(100vh - 130px); 
+    width: 100%;
+}
+
+.form-container {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px; /* Köşeleri biraz daha yumuşattım */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); /* Karanlık temaya uygun daha derin bir gölge */
+  width: 100%;
+  max-width: 380px; /* Form çok sıkışmasın diye biraz genişlettim */
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px; /* İç boşluğu biraz artırdım, daha ferah durur */
+  border: 1px solid #ccc;
+  border-radius: 8px; /* İnput köşelerini de yumuşattım */
+  box-sizing: border-box; 
+  font-size: 16px;
+  color: #555;
+  background-color: #f9f9f9;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #c5fb6e; /* Focus rengini sitenin ana neon yeşili ile uyumlu yaptım */
+  box-shadow: 0 0 5px rgba(197, 251, 110, 0.5);
+}
+
+.button {
+  width: 100%;
+  padding: 14px;
+  background-color: #c5fb6e; /* Butonu sitenin konsept rengine çevirdim */
+  color: #000;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  background-color: #a4db4b; /* Üzerine gelince biraz koyulaşır */
+}
+
+
+
+
+
+
+/* =========================================
+   TABLET VE MOBİL UYUMU (RESPONSIVE)
+   ========================================= */
+
+/* Formun kenarlara yapışmasını engellemek için dış kutuya iç boşluk ekliyoruz */
+.form-wrapper {
+    padding: 0 15px; 
+}
+
+/* Tabletler ve Büyük Ekranlı Telefonlar İçin (768px ve altı) */
+@media (max-width: 768px) {
+    .header {
+        padding: 15px; 
+    }
+    
+    .site-title {
+        font-size: 1.3rem; /* Başlığı biraz küçült */
+    }
+    
+    .form-container {
+        padding: 25px; /* Form iç boşluğunu daralt */
+        max-width: 100%; /* Ekranı tam kaplamasına izin ver */
+    }
+}
+
+/* Küçük Ekranlı Telefonlar İçin (480px ve altı) */
+@media (max-width: 480px) {
+    body {
+        padding: 10px; /* Gövde boşluğunu azalt ki ekranda yer açılsın */
+    }
+
+    .logo {
+        width: 35px; /* Logoyu küçült */
+        height: 35px;
+    }
+
+    .form-container {
+        padding: 20px 15px; /* Formu iyice dar ekranlara uydur */
+    }
+
+    .form-group input {
+        padding: 10px;
+        font-size: 15px; /* Yazıları mobilde rahat okunacak boyuta getir */
+    }
+
+    .button {
+        padding: 12px;
+        font-size: 16px;
+    }
+}
