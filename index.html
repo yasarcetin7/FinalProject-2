@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MoneyLiveArea</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
 </head>
+
 <body>
 
     <header class="header">
         <div class="header-left">
-            <div class="logo"> 
+            <div class="logo">
                 <img src="./money emblem.png" alt="MoneyLiveArea amblemi" />
-            </div> 
+            </div>
             <h2 class="site-title">MoneyLiveArea</h2>
         </div>
 
@@ -31,8 +32,8 @@
     <div class="hero-section">
         <p>Canlı kripto para fiyatlarını takip edin ve favori coinlerinizi panoya ekleyin!</p>
     </div>
-    
-    <h1>İşlem hacmi en yüksek 8 coin</h1>
+
+    <h1>İşlem hacmi en yüksek coinler</h1>
 
     <div class="dashboard">
         <div class="card" onclick="grafigiAc('BTCUSDT', 'Bitcoin (BTC / USDT)')">
@@ -78,7 +79,7 @@
         </div>
 
         <div class="card" onclick="grafigiAc('SOLUSDT', 'Solana (SOL / USDT)')">
-            <div class="symbol-name">Solana (SOL/USDT)</div>  
+            <div class="symbol-name">Solana (SOL/USDT)</div>
             <div class="price" id="price-sol">Yükleniyor...</div>
             <div class="status" id="status-sol">Canlı bağlantı Bekleniyor..</div>
         </div>
@@ -87,28 +88,32 @@
         <h2>
             ⭐ Senin Takip Ettiklerin
         </h2>
-        
+
         <div class="dashboard" id="custom-dashboard">
-            </div>
-    </div> <div class="bottom-widgets">
+        </div>
+    </div>
+    <div class="bottom-widgets">
         <div class="video-widget">
             <h2 class="widget-title">📺 Günün Analizi</h2>
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/lEMHYOf90SQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/watch?v=QjvNKNM2RU0" title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
             </div>
         </div>
 
         <div class="comment-widget">
             <h2 class="widget-title">💬 Yayıncı Yorumları</h2>
-            
+
             <form id="comment-form">
                 <input type="text" id="comment-author" placeholder="Adınız veya Unvanınız..." required>
-                <textarea id="comment-text" rows="3" placeholder="Piyasa hakkındaki düşüncelerinizi paylaşın..." required></textarea>
+                <textarea id="comment-text" rows="3" placeholder="Piyasa hakkındaki düşüncelerinizi paylaşın..."
+                    required></textarea>
                 <button type="submit" class="btn btn-primary">Yorum Gönder</button>
             </form>
 
             <div id="comments-list">
-                 </div>
+            </div>
         </div>
     </div>
 
@@ -116,16 +121,17 @@
         <div class="modal-content">
             <span class="close-btn" onclick="grafigiKapat()">&times;</span>
             <h2 id="modal-title">Grafik Yükleniyor...</h2>
-            
-            <div class="chart-lock-container">
-                <h3 class="lock-text">Grafiği görmek için üye girişi yapınız veya kayıt olunuz.</h3>
-                <div class="lock-buttons">
-                    <a href="giriş/giriş.html" class="lock-btn btn-primary">Giriş Yap</a>
-                    <a href="kayıtol/kayıtol.html" class="lock-btn btn-outline">Kayıt Ol</a>
-                </div>
-            </div>
 
-            <div class="tv-logo">TV</div>
+            <div class="chart-toolbar" role="group" aria-label="Zaman aralığı">
+                <button type="button" class="interval-btn" data-interval="15m">15 dk</button>
+                <button type="button" class="interval-btn" data-interval="1h">1 sa</button>
+                <button type="button" class="interval-btn is-active" data-interval="4h">4 sa</button>
+                <button type="button" class="interval-btn" data-interval="1d">1 gün</button>
+            </div>
+            <div class="chart-panel">
+                <div id="chart-container"></div>
+                <p id="chart-status" class="chart-status"></p>
+            </div>
         </div>
     </div>
 
@@ -136,19 +142,23 @@
                     <img src="./money emblem.png" alt="MoneyLiveArea Logo">
                     <h3>MoneyLiveArea</h3>
                 </div>
-                <p>Kripto para piyasasını eş zamanlı takip edin, analizleri okuyun ve kendi favori listenizi oluşturarak yatırımlarınızı kolayca yönetin.</p>
+                <p>Kripto para piyasasını eş zamanlı takip edin, analizleri okuyun ve kendi favori listenizi oluşturarak
+                    yatırımlarınızı kolayca yönetin.</p>
             </div>
             <div class="footer-warning">
                 <h2>Yasal Uyarı</h2>
-                <p>Burada yer alan yatırım bilgi, yorum ve tavsiyeleri yatırım danışmanlığı kapsamında değildir. Kripto para birimleri yüksek volatilite içerir ve risk taşır.</p>
+                <p>Burada yer alan yatırım bilgi, yorum ve tavsiyeleri yatırım danışmanlığı kapsamında değildir. Kripto
+                    para birimleri yüksek volatilite içerir ve risk taşır.</p>
             </div>
         </div>
-        
+
         <div class="footer-bottom">
             <p>&copy; 2024 MoneyLiveArea. Tüm hakları saklıdır.</p>
         </div>
     </footer>
 
+    <script src="https://unpkg.com/lightweight-charts@5.2.1/dist/lightweight-charts.standalone.production.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>
