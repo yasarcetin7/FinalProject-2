@@ -131,16 +131,126 @@ function panoyaEkle(symbol, temizSembol) {
     aboneOl(symbol);
 }
 
-/*  GRAFİK PENCERESİ (MODAL) VE KISITLAMA İŞLEMLERİ */
-async function grafigiAc(symbol, coinAdi, interval = '4h') {
-  
+/*  MUM GRAFİĞİ: Binance herkese açık kline verisi, API anahtarı yok */
+const grafikAraliklari = ['15m', '1h', '4h', '1d'];
+let grafikNesnesi = null;
+let grafikIstegi = 0;
+let acikSembol = null;
+
+function grafigiAc(symbol, coinAdi, interval = '4h') {
+    acikSembol = symbol;
+    const secilenAralik = grafikAraliklari.includes(interval) ? interval : '4h';
     const modal = document.getElementById('chart-modal');
     modal.style.display = 'block';
     document.getElementById('modal-title').innerText = `${coinAdi} Grafiği`;
+    aralikButonlariniIsaretle(secilenAralik);
+    mumGrafiginiYukle(symbol, secilenAralik);
 }
+
 function grafigiKapat() {
+    grafikIstegi += 1;
     document.getElementById('chart-modal').style.display = 'none';
+    grafigiTemizle();
 }
+
+function grafigiTemizle() {
+    if (grafikNesnesi) {
+        grafikNesnesi.remove();
+        grafikNesnesi = null;
+    }
+    const konteyner = document.getElementById('chart-container');
+    if (konteyner) konteyner.replaceChildren();
+}
+
+function aralikButonlariniIsaretle(interval) {
+    document.querySelectorAll('.interval-btn').forEach((button) => {
+        const secili = button.dataset.interval === interval;
+        button.classList.toggle('is-active', secili);
+        button.setAttribute('aria-pressed', secili ? 'true' : 'false');
+    });
+}
+
+async function mumGrafiginiYukle(symbol, interval) {
+    const istekNo = ++grafikIstegi;
+    const durum = document.getElementById('chart-status');
+    if (durum) durum.textContent = 'Mum verisi yükleniyor...';
+    grafigiTemizle();
+
+    try {
+        const url = `https://data-api.binance.vision/api/v3/klines?symbol=${encodeURIComponent(symbol)}&interval=${encodeURIComponent(interval)}&limit=200`;
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('Binance yanıtı alınamadı');
+        const satirlar = await response.json();
+        if (istekNo !== grafikIstegi) return;
+        if (!Array.isArray(satirlar) || satirlar.length === 0) throw new Error('Mum verisi boş');
+
+        const mumlar = satirlar.map((satir) => ({
+            time: Math.floor(satir[0] / 1000),
+            open: Number(satir[1]),
+            high: Number(satir[2]),
+            low: Number(satir[3]),
+            close: Number(satir[4]),
+        }));
+
+        grafigiCiz(mumlar);
+        if (istekNo !== grafikIstegi) return;
+        if (durum) durum.textContent = '';
+    } catch (error) {
+        if (istekNo !== grafikIstegi) return;
+        if (durum) durum.textContent = 'Mum verisi alınamadı. Bağlantını kontrol edip tekrar dene.';
+    }
+}
+
+function grafigiCiz(mumlar) {
+    const konteyner = document.getElementById('chart-container');
+    const durum = document.getElementById('chart-status');
+    if (!konteyner || typeof LightweightCharts === 'undefined') {
+        if (durum) durum.textContent = 'Grafik kütüphanesi yüklenemedi.';
+        return;
+    }
+
+    grafikNesnesi = LightweightCharts.createChart(konteyner, {
+        autoSize: true,
+        layout: {
+            background: { color: '#0d1117' },
+            textColor: '#c9d1d9',
+        },
+        grid: {
+            vertLines: { color: '#21262d' },
+            horzLines: { color: '#21262d' },
+        },
+        rightPriceScale: { borderColor: '#30363d' },
+        timeScale: {
+            borderColor: '#30363d',
+            timeVisible: true,
+            secondsVisible: false,
+        },
+    });
+
+    const seri = grafikNesnesi.addSeries(LightweightCharts.CandlestickSeries, {
+        upColor: '#3fb950',
+        downColor: '#f85149',
+        borderVisible: false,
+        wickUpColor: '#3fb950',
+        wickDownColor: '#f85149',
+    });
+    seri.setData(mumlar);
+    grafikNesnesi.timeScale().fitContent();
+}
+
+document.querySelectorAll('.interval-btn').forEach((button) => {
+    button.addEventListener('click', () => {
+        if (!acikSembol) return;
+        const interval = button.dataset.interval;
+        aralikButonlariniIsaretle(interval);
+        mumGrafiginiYukle(acikSembol, interval);
+    });
+});
+
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') grafigiKapat();
+});
+
 window.onclick = function(event) {
     const modal = document.getElementById('chart-modal');
     if (event.target === modal) {
