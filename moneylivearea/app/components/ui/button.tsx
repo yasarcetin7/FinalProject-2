@@ -17,7 +17,7 @@ const buttonVariants = cva(
           ghost:
           "absolute top-3 end-3.5 cursor-pointer border-0 bg-transparent p-0 text-[32px] leading-none font-bold text-muted hover:text-down",
         destructive:
-          "p-3 mx-1 hover:scale-105 bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
+        "cursor-pointer rounded-lg border-0 bg-brand px-5 py-2.5 text-base font-bold text-black transition-colors duration-300 hover:bg-[#a4db4b] motion-reduce:transition-none",
         link: "text-primary",
         success:
           "p-3 mx-1 hover:scale-105 bg-green-500/10 text-green-600 hover:bg-green-500/20 focus-visible:border-green-500/40 focus-visible:ring-green-500/20 dark:bg-green-500/20 dark:text-green-400 dark:hover:bg-green-500/30 dark:focus-visible:ring-green-500/40",

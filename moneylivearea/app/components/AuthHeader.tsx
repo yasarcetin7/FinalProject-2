@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import emblem from "../../money amblem.png";
+import { Button } from "./ui/button";
 
 export default function AuthHeader() {
   const router = useRouter();
@@ -18,13 +19,14 @@ export default function AuthHeader() {
         </div>
         <h2 className="m-0 text-2xl text-white max-[768px]:text-[1.3rem]">MoneyLiveArea</h2>
       </div>
-      <button
+      <Button
         type="button"
-        className="cursor-pointer rounded-lg border-0 bg-brand px-5 py-2.5 text-base font-bold text-black transition-colors duration-300 hover:bg-[#a4db4b] motion-reduce:transition-none"
+        variant="destructive"
+        size="none"
         onClick={() => router.push("/")}
       >
         Ana Sayfa
-      </button>
+      </Button>
     </header>
   );
 }
