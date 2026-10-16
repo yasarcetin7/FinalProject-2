@@ -117,7 +117,6 @@ export default function HomePage() {
             type="button"
             variant="ghost"
             size="none"
-            aria-label="Kapat"
             onClick={() => void grafikModulu().then((mod) => mod.grafigiKapat())}
           >
             &times;
